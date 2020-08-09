@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete project</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<h3>Delete project</h3>
+<form method="post">
+    <select id="projectId" name="projectId" size=10 style="width:50%">
+        <option th:each="project : ${projectList}"
+                th:text="${project.id}+' - '+${project.title}"
+                th:value="${project.id}">
+        </option>
+    </select><p>
+    <button type="submit" style="min-height:38px">Delete project</button><p>
+    <div th:text="${info}"></div>
+</form><p>
+    <a href="/main">Back to User Paige</a>
+</body>
+</html>

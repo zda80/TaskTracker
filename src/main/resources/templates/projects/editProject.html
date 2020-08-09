@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Project</title>
+    <link rel="stylesheet" href="/css/project.css"/>
+</head>
+<body>
+<form id="editForm" name="editForm" action="/projects/reloadProject" method="POST">
+
+    <table width="100%">
+        <th>
+            <h3 th:text="${info}"></h3>
+        </th>
+        <th width="180px">
+            <a href="/projects/selectProject">Select Project</a><br>
+        </th>
+        <th width="180px">
+            <a href="/main">Main Paige</a>
+        </th>
+    </table>
+    <div style="background-color: grey;">
+        <table id="headTable">
+            <td align="left" width="5%" valign="top">
+                <label>ID:</label><br>
+                <input type="text" name="id" th:value="${currentProject.id}" class="notactive" style="width: 100%;"
+                       readonly/><p>
+            </td>
+            <td align="left" width="20%" valign="top">
+                <label>Title:</label><br>
+                <input type="text" name="title" th:value="${currentProject.title}" style="width: 100%;"/><p>
+                    <label>Supervisor:</label><br>
+                    <select id="supervisor" name="supervisor" style="width: 100%;">
+                        <option value="">Select user</option>
+                        <option th:each="user : ${userList}"
+                                th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                                th:selected="${user==currentProject.supervisor}"
+                                th:value="${user.id}">
+                        </option>
+                    </select>
+            </td>
+            <td align="left" width="20%" valign="top">
+                <label>Department:</label><br>
+                <input type="text" name="departmentName" th:value="${currentProject.departmentName}"
+                       style="width: 100%;"/><p>
+                    <label>Administrator:</label><br>
+                    <select id="admin" name="admin" style="width: 100%;">
+                        <option value="">Select user</option>
+                        <option th:each="user : ${userList}"
+                                th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                                th:selected="${user==currentProject.admin}"
+                                th:value="${user.id}">
+                        </option>
+                    </select>
+            </td>
+            <td align="left" width="20%" valign="top">
+                <label>Description:</label><br>
+                <input type="text" name="description" style="height: 64px; width: 100%;"
+                       th:value="${currentProject.description}"/>
+            </td>
+            <td align="left" width="35%" valign="top">
+                <label>Project Sprints</label><br>
+                <select id="selectedSprint" name="selectedSprint" size=4 style="width: 100%;">
+                    <option th:each="sprint : ${currentProject.sprints}"
+                            th:text="${sprint.id}+' - '+${sprint.title}"
+                            th:value="${sprint.id}">
+                    </option>
+                </select>
+                <button formaction="/sprints/changeSprint" class="sprintButton">Set Current</button>
+                <button formaction="/sprints/createSprint" class="sprintButton">Create</button>
+                <button formaction="/sprints/editSelectedSprint" class="sprintButton">Edit</button>
+                <button formaction="/sprints/deleteSprint" class="sprintButton">Delete</button>
+            </td>
+        </table>
+        </td>
+        </table><p>
+        <div style="display:flex;justify-content:center;align-items:center;">
+            <button formaction="/projects/editProject" style="min-height:30px;">Save Changes</button>
+        </div><p>
+            <table style="color:#FFD700; background:   #4e4e4e;">
+                <td width="49%" align="left" valign="top">
+                    <label>Project backlog ID:</label>
+                    <input type="text" name="projectBacklog.id" th:value="${currentProject.projectBacklog.id}"
+                           style="width: 50px;" class="notactive" readonly/>
+                    <label style="margin-left: 10px;">Title:</label>
+                    <input type="text" name="projectBacklog.title" th:value="${currentProject.projectBacklog.title}"
+                           style="width: calc(100% - 310px);"/><p>
+            <label>Backlog issues:</label><br>
+            <select id="backlogIssue" name="backlogIssue" size=10 style="width: 100%;">
+                <option th:each="issue : ${currentProject.projectBacklog.issueList}"
+                        th:text="'ID: '+${issue.id}+', Priority: '+${issue.priority}+', Type: '+${issue.issueType} +', Status: '+${issue.workFlowCurrentStatus}+', Title: '+${issue.title}"
+                        th:value="${issue.id}">
+                </option>
+            </select>
+            <button formaction="/issues/moveToSprint" class="issueButton">Move To Sprint</button>
+            <button formaction="/issues/editIssue" class="issueButton">Edit Issue</button>
+            <button formaction="/issues/newIssue" class="issueButton">Add new Issue</button>
+            <button formaction="/issues/newChildIssue" class="issueButton">Add Child Issue</button>
+            <button formaction="/issues/deleteIssue" class="issueButton">Delete Issue</button>
+            </td>
+            <td width="49%" align="left" valign="top">
+                <label>Current Sprint ID:</label>
+                <input type="text" id="currentSprintId"
+                       th:value="${currentProject.currentSprint==null?'':currentProject.currentSprint.id}"
+                       style="width: 50px;" class="notactive" readonly/>
+                <label style="margin-left: 10px;">Title:</label>
+                <input type="text" id="currentSprintTitle"
+                       th:value="${currentProject.currentSprint==null?'':currentProject.currentSprint.title}"
+                       style="width: calc(100% - 295px);" class="notactive" readonly/><p>
+            <label>Current Sprint Issues</label><br>
+            <select id="currentSprintIssue" name="currentSprintIssue" size=10 style="width: 100%;">
+                <option th:each="issue : ${currentProject.currentSprint==null? null : currentProject.currentSprint.issueList}"
+                        th:text="'ID: '+${issue.id}+', Priority: '+${issue.priority}+', Type: '+${issue.issueType} +', Status: '+${issue.workFlowCurrentStatus}+', Title: '+${issue.title}"
+                        th:value="${issue.id}">
+                </option>
+            </select>
+            <button formaction="/issues/moveToBacklog" class="issueButton">Move To Backlog</button>
+            <button formaction="/issues/editIssueInSprint" class="issueButton">Edit Issue</button>
+            </td>
+            </table>
+    </div>
+    <h3>Backlog filters:</h3>
+    <div name="RequestDTO">
+        <table>
+            <td width="16%">
+                <label>Priority filter:</label><br>
+                <select class="filter" id="issuePriorityFilter" name="issuePriorityFilter"
+                        onchange="this.form.submit()" style="width: 90%; background-color:lightgrey;">
+                    <option value="">none</option>
+                    <option th:each="priority : ${requestDTO.issuePriorityList}"
+                            th:text="${priority}"
+                            th:selected="${priority==requestDTO.issuePriorityFilter}"
+                            th:value="${priority}">
+                    </option>
+                </select>
+            </td>
+            <td width="17%">
+                <label>Executor filter:</label><br>
+                <select class="filter" id="executorFilterId" name="executorFilterId"
+                        onchange="this.form.submit()" style="width: 90%; background-color:lightgrey;">
+                    <option value="">none</option>
+                    <option th:each="user : ${userList}"
+                            th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                            th:selected="${requestDTO==null? false: user.id==requestDTO.executorFilterId}"
+                            th:value="${user.id}">
+                    </option>
+                </select>
+            </td>
+            <td width="16%">
+                <label>Reporter filter:</label><br>
+                <select class="filter" id="reporterFilterId" name="reporterFilterId"
+                        onchange="this.form.submit()">
+                    <option value="">none</option>
+                    <option th:each="user : ${userList}"
+                            th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                            th:selected="${requestDTO==null? false: user.id==requestDTO.reporterFilterId}"
+                            th:value="${user.id}">
+                    </option>
+                </select>
+            </td>
+            <td width="17%">
+                <label>Creation before filter:</label><br>
+                <input type="date" name="creationBefore" th:value="${requestDTO.creationBefore}"
+                       onchange="this.form.submit()" class="filter"/>
+            </td>
+            <td width="16%">
+                <label>Creation after filter:</label><br>
+                <input type="date" name="creationAfter" th:value="${requestDTO.creationAfter}"
+                       onchange="this.form.submit()" class="filter"/>
+            </td>
+            <td width="17%">
+                <label>Title filter:</label><br>
+                <input type="text" name="titleFilter" th:value="${requestDTO.titleFilter}"
+                       oninput="this.form.submit()" class="filter"/>
+            </td>
+        </table>
+    </div>
+</form>
+</body>
+</html>

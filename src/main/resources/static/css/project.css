@@ -1,0 +1,62 @@
+ * { box-sizing: border-box;
+}
+
+    body {
+ 	background: #292929;
+    color: #ffffff;
+    font: 12pt sans-serif;
+}
+
+table {
+ 	width:100%;
+    border-spacing: 20px 10px;
+    align="left" ;
+    valign="top";
+}
+
+h3{
+ 	color:#f44336;
+    text-align: center;
+}
+
+#headTable {
+
+    color: #ffffff;
+    font: 12pt sans-serif;
+}
+
+a {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
+}
+
+.notactive {
+    background-color: #292929;
+    color: white;
+    }
+
+.filter {
+    background-color:lightgrey;
+	width: 90%;
+    float: left;
+}
+
+.issueButton {
+   width: 19%;
+   min-height:30px;
+   float: left;
+}
+
+.sprintButton {
+  width:24%;
+  min-height:32px;
+  float: left;
+}

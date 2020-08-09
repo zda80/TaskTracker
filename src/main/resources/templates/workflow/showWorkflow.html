@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Workflow</title>
+    <link rel="stylesheet" href="/css/show.css" />
+</head>
+<body>
+<h3>Workflow list:</h3>
+<table style="width:100%">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Statuses</th>
+    </tr>
+    <tr th:each="workflow : ${workflowList}">
+        <td th:text="${workflow.id}"></td>
+        <td th:text="${workflow.title}"></td>
+    <td th:each="status : ${workflow.workFlowList}">
+        <p th:text="${status}"></p>
+    </td>
+    </tr>
+</table><p>
+<a href="/main">Back to Main Paige</a>
+</body>
+</html>

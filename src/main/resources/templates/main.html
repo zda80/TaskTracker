@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<div id="mainPage">
+    <h2>
+        <label>You entered as: </label>
+        <label th:text="${username}"></label>
+    </h2>
+    <table>
+        <th align="left" valign="top">
+            <p>User menu </p>
+            <a href="/users/showusers">Show all users</a><p>
+            <a href="/users/registration">Create New User</a><p>
+            <a href="/users/deleteuser">Delete user</a><p>
+            <a href="/users/edituser">Edit user</a><p>
+        </th>
+        <th align="left" valign="top">
+            <p>Project menu </p>
+            <a href="/projects/showProjects">Show projects</a><p>
+            <a href="/projects/createProject">Create project</a><p>
+            <a href="/projects/deleteProject">Delete project</a><p>
+            <a href="/projects/selectProject">Edit project</a><p>
+            <a href="/logout">Logout</a><p>
+        </th>
+        <th align="left" valign="top">
+            <p>Workflow menu </p>
+            <a href="/workflow/showWorkflow">Show workflow</a><p>
+            <a href="/workflow/createWorkflow">Create workflow</a><p>
+            <a href="/workflow/deleteWorkflow">Delete workflow</a><p>
+            <a href="/workflow/selectWorkflow">Edit workflow</a><p>
+        </th>
+    </table>
+</div>
+</body>
+</html>

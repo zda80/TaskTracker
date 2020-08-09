@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Create New Project</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<h2 class="title">Create project</h2>
+<form id="createProjectForm" name="createProjectForm" action="/projects/createProject" method="POST">
+    <table width="100%">
+        <th>
+            <label>Title:</label><br>
+            <input type="text" name="title"/><p>
+                <label>Administrator:</label><br>
+                <select id="admin" name="admin">
+                    <option value="">Select user</option>
+                    <option th:each="user : ${userList}"
+                            th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                            th:value="${user.id}">
+                    </option>
+                </select>
+        </th>
+        <th>
+            <label>Description:</label><br>
+            <input type="text" name="description" style="height: 80px; width:80%"/><p>
+        </th>
+        <th>
+            <label>Department name:</label><br>
+            <input type="text" name="departmentName"/><p>
+                <label>Supervisor:</label><br>
+                <select id="supervisor" name="supervisor">
+                    <option value="">Select user</option>
+                    <option th:each="user : ${userList}"
+                            th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                            th:value="${user.id}">
+                    </option>
+                </select>
+        </th>
+    </table>
+    <button type="submit" class="mainButton">Create Project</button><p>
+    <h3 th:text="${info}"></h3>
+</form>
+<a href="/main">Back to the main Paige</a>
+</body>
+</html>

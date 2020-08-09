@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Create New Project</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<form id="issueForm" name="issueForm" action="/issues/reload" method="POST">
+    <h3>Issue</h3>
+    <table width="100%">
+        <th align="left" valign="top">
+            <label>Issue ID:</label><br>
+            <input type="text" name="id" th:value="${issue.id}" readonly class="notactive"/><p>
+                <label>Issue Type:</label><br>
+                <select id="issueType" name="issueType">
+                    <option value="">Select type</option>
+                    <option th:each="issueType : ${issueTypes}"
+                            th:text="${issueType}"
+                            th:selected="${issue.issueType==issueType}"
+                            th:value="${issueType}">
+                    </option>
+                </select><p>
+                <label>Priority:</label><br>
+                <select id="priority" name="priority">
+                    <option value="">Select type</option>
+                    <option th:each="priority : ${priorityList}"
+                            th:text="${priority}"
+                            th:selected="${issue.priority==priority}"
+                            th:value="${priority}">
+                    </option>
+                </select><p>
+                <label>Parent Issue:</label><br>
+                <select id="parentIssue" name="parentIssue">
+                    <option value="">Select parent Issue</option>
+                    <option th:each="pIssue : ${issueList}"
+                            th:text="${pIssue.id}+' - '+${pIssue.title}"
+                            th:selected="${issue.parentIssue==pIssue}"
+                            th:value="${pIssue.id}">
+                    </option>
+                </select><p>
+        </th>
+        <th align="left" valign="top">
+            <label>Title:</label><br>
+            <input type="text" name="title" th:value="${issue.title}"/><p>
+                <label>Description:</label><br>
+                <input type="text" name="description" th:value="${issue.description}" style="height: 80px;"/><p>
+                <label>WorkFlow:</label><br>
+                <select class="form-control" id="workflow" name="workflow" onchange="this.form.submit()">
+                    <option value="">Select workflow</option>
+                    <option th:each="workflow : ${workflowList}"
+                            th:text="${workflow.title}"
+                            th:selected="${issue.workflow==workflow}"
+                            th:value="${workflow.id}">
+                    </option>
+                </select><p>
+        </th>
+        <th align="left" valign="top">
+            <label>Creation Date:</label><br>
+            <input type="date" name="creationDate" th:value="${issue.creationDate}"/><p>
+                <label>Executor:</label><br>
+                <select class="form-control" id="executor" name="executor">
+                    <option value="">Select user</option>
+                    <option th:each="user : ${userList}"
+                            th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                            th:selected="${issue.executor==user}"
+                            th:value="${user.id}">
+                    </option>
+                </select><p>
+                <label>Reporter:</label><br>
+                <select class="form-control" id="reporter" name="reporter">
+                    <option value="">Select user</option>
+                    <option th:each="user : ${userList}"
+                            th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                            th:selected="${issue.reporter==user}"
+                            th:value="${user.id}">
+                    </option>
+                </select><p>
+                <label>WorkFlow Status:</label><br>
+                <select class="form-control" id="workFlowCurrentStatus" name="workFlowCurrentStatus">
+                    <option value="">Select status</option>
+                    <option th:each="status : ${issue.workflow==null? null : issue.workflow.workFlowList}"
+                            th:text="${status}"
+                            th:selected="${issue.workFlowCurrentStatus==status}"
+                            th:value="${status}">
+                    </option>
+                </select><p>
+        </th>
+        </th>
+    </table>
+    <button formaction="/issues/saveEditIssue" class="mainButton">Save and Quit</button><p>
+</form>
+</body>
+</html>

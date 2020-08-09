@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit user</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<h3>Edit user</h3>
+<form id="selectForm" name="selectForm" action="/users/edituser" method="post">
+    <select id="username" name="username" onchange="this.form.submit()">
+        <option value="">Select user</option>
+        <option th:each="user : ${userList}"
+                th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                th:selected="${currentUser==null} ? 'false':${user.username==currentUser.username}"
+                th:value="${user.username}">
+        </option>
+    </select>
+</form>
+<br>
+<form id="editForm" name="editForm" action="/users/saveChanges" method="POST">
+    <table align="center">
+        <th>
+            <label>Login:</label><br>
+            <input type="text" name="username" th:value="${currentUser==null} ? '':${currentUser.username}" readonly/><p>
+            <label>Last Name:</label><br>
+            <input type="text" name="lastName" th:value="${currentUser==null} ? '':${currentUser.lastName}"/><p>
+        </th>
+        <th>
+            <label>First Name:</label><br>
+            <input type="text" name="firstName" th:value="${currentUser==null} ? '':${currentUser.firstName}"/><p>
+            <label>Patronymic:</label><br>
+            <input type="text" name="patronymic" th:value="${currentUser==null} ? '':${currentUser.patronymic}"/><p>
+        </th>
+    </table>
+    <button type="submit" class="mainButton">Save Changes</button><p>
+    <h3 th:text="${info}"></h3><p>
+</form>
+<a href="/main">Back to the main Paige</a>
+</body>
+</html>

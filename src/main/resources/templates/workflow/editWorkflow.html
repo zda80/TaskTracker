@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Create New Workflow</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<h2 class="title">Workflow</h2>
+<form id="workflow" name="workflow" action="/workflow/saveWorkflow" method="POST">
+    <table width="100%">
+        <th width="50%" align="left" valign="top">
+            <label>ID:</label><br>
+            <input type="text" name="id" th:value="${workflow.id}" readonly/><p>
+                <label>Actual statuses:</label><br>
+                <select id="currentStatus" name="currentStatus" size=8 style="width: 90%;">
+                    <option th:each="status : ${workflow.workFlowList}"
+                            th:text="${status}"
+                            th:value="${status}">
+                    </option>
+                </select><p>
+                <button class="smallButton" formaction="/workflow/removeStatus">Remove status</button>
+        </th>
+        <th width="50%" align="left" valign="top">
+            <label>Title:</label><br>
+            <input type="text" name="title" th:value="${workflow.title}"/><p>
+                <label>Available statuses:</label><br>
+                <select id="statusList" name="statusList" size=8 style="width: 90%;">
+                    <option th:each="status : ${statuses}"
+                            th:text="${status}"
+                            th:value="${status}">
+                    </option>
+                </select><p>
+                <button class="smallButton" formaction="/workflow/addStatus">Add status</button>
+        </th>
+    </table>
+    <button class="mainButton" type="submit">Save</button><p>
+</form>
+<h3 th:text="${info}" align="center"></h3>
+<a href="/main">Back to the main Paige</a><p>
+</body>
+</html>

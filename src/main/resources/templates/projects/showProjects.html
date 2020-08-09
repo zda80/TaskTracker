@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show projects</title>
+    <link rel="stylesheet" href="/css/show.css" />
+</head>
+<body>
+<h3>Project list:</h3>
+<table style="width:100%">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Department Name</th>
+    </tr>
+    <tr th:each="project : ${projectList}">
+        <td th:text="${project.id}"></td>
+        <td th:text="${project.title}"></td>
+        <td th:text="${project.description}"></td>
+        <td th:text="${project.departmentName}"></td>
+</table><p>
+<a href="/main">Back to Main Paige</a>
+</body>
+</html>

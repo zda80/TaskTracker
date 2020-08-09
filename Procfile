@@ -1,0 +1,1 @@
+web: java -jar target/TaskTracker-task-1.0-SNAPSHOT.jar

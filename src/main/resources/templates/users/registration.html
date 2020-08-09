@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Registration</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div id="registrationPage">
+    <h2 class="title">Registration</h2>
+    <form id="regForm" name="regForm" method="POST">
+        <table style="width:100%">
+            <th>
+                <label>Login:</label><br>
+                <input type="text" name="username"/><p>
+                <label>Last Name:</label><br>
+                <input type="text" name="lastName"/>
+            </th>
+            <th>
+                <label>First Name:</label><br>
+                <input type="text" name="firstName"/><p>
+                <label>Patronymic:</label><br>
+                <input type="text" name="patronymic"/>
+            </th>
+            <th>
+                <label>Password:</label><br>
+                <input type="password" name="password"/><p>
+                <label>Password confirm:</label><br>
+                <input type="password" name="passwordConfirm"/>
+            </th>
+        </table>
+        <button type="submit">Registration</button><p>
+        <div th:text="${info}"></div><p>
+    </form>
+    <a href="/main">Back to the main Paige</a>
+</div>
+</body>
+</html>

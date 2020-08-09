@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<div id="loginPage">
+    <h1 class="title">Login</h1>
+    <form id="loginForm" name="loginForm" action="/login" onsubmit="return validate()" method="POST">
+        <label>E-mail:</label>
+        <input type="text" id="username" name="username"/><p>
+            <label>Password:</label>
+            <input type="password" id="password" name="password"/><p>
+            <input name="submit" type="submit" value="Login"/><p>
+            <a href="/users/registration">Registration</a>
+            <div th:if="${(param.error != null) and (param.error[0] == 'true')}">
+              E-mail or password is incorrect
+            </div>
+    </form>
+</div>
+</body>
+</html>

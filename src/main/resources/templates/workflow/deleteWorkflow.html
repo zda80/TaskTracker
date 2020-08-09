@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Workflow</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<h3>Delete Workflow</h3>
+<form id="selectForm" name="selectForm" action="/workflow/deleteWorkflow" method="post">
+    <select id="workflowId" name="workflowId" size=10 style="width:50%">
+        <option th:each="workflow : ${workflowList}"
+                th:text="${workflow.id} + ' - '+${workflow.title}"
+                th:value="${workflow.id}">
+        </option>
+    </select><p>
+        <button type="submit" style="min-height:38px">Delete workflow</button><p>
+    <div th:text="${info}"></div>
+</form><p>
+    <a href="/main">Back to the main Paige</a>
+</body>
+</html>

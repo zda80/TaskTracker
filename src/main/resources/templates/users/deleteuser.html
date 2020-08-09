@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete user</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<h3>Delete user</h3>
+<form method="post">
+    <select id="username" name="username" size=10 style="width:50%">
+        <option th:each="user : ${userList}"
+                th:text="${user.id}+' - '+${user.username}+' - '+${user.firstName}+' '+${user.lastName}"
+                th:value="${user.username}">
+        </option>
+    </select><p>
+        <button type="submit" style="min-height:38px">Delete user</button><p>
+    <div th:text="${info}"></div>
+</form><p>
+    <a href="/main">Back to User Paige</a>
+</body>
+</html>
